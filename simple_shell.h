@@ -25,7 +25,8 @@ char **split_user_input(char *user_input, int sub_string_count);
 int compute_substrings(char *user_input);
 void _bd_present_prompt(void);
 void _bd_strip_newline(void);
-int wait_child(pid_t subordinate_process, char **instruction, char **argv);
+void wait_child(pid_t subordinate_process, int *exec_status,
+char **instruction);
 
 /** helper Tools functions */
 ssize_t _bd_output(const char *transmit_data);

@@ -7,7 +7,8 @@
  * @argv: a pointer to an array of strings representing program arguments
  * Return: 0 on success
  */
-int inst_sequence_exec(char **instruction, char **argv)
+int
+inst_sequence_exec(char **instruction, char **argv)
 {
 	int exec_status;
 	pid_t subordinate_process;
@@ -19,7 +20,7 @@ int inst_sequence_exec(char **instruction, char **argv)
 		perror(argv[0]);
 		exit(0);
 	}
-	else if (subordinate_process == 0)
+	if (subordinate_process == 0)
 	{
 		_bd = execve(instruction[0], instruction, environ);
 		if (_bd == -1)
@@ -31,8 +32,7 @@ int inst_sequence_exec(char **instruction, char **argv)
 	}
 	else
 	{
-		exec_status = wait_child(subordinate_process, instruction, argv);
+		wait_child(subordinate_process, &exec_status, instruction);
 	}
-
-	return (exec_status);
+	return (WEXITSTATUS(exec_status));
 }
