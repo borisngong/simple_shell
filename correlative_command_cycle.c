@@ -13,6 +13,7 @@ int correlative_command_cycle(char **argv)
 	char *user_input;
 	char **instruction;
 	int exec_status = 0;
+	int exec_id = 0;
 
 	while (true)
 	{
@@ -23,6 +24,7 @@ int correlative_command_cycle(char **argv)
 			_bd_strip_newline();
 			return (exec_status);
 		}
+		exec_id++;
 
 		instruction = lexical_analyzer(user_input);
 		if (!instruction)
@@ -32,6 +34,6 @@ int correlative_command_cycle(char **argv)
 				break;
 			}
 		}
-		exec_status = inst_sequence_exec(instruction, argv);
+		exec_status = inst_sequence_exec(instruction, argv, exec_id);
 	}
 }
