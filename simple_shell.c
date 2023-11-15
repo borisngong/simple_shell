@@ -1,7 +1,7 @@
 #include "simple_shell.h"
 /**
  * main - entry point of the simple_shell program serving as
- * the starting point of the program
+ * the starting point of the simple shell program
  * @argc: argument count, number of command-line arguments
  * passed to the program when it is executed, here (void) argc
  * indicate variable is unused and prevent compiler warnings
@@ -11,8 +11,7 @@
  */
 int main(int argc __attribute__((unused)), char **argv)
 {
-	int exit_status;
-
-	exit_status = correlative_command_cycle(argv);
-	return (exit_status);
+	int exec_status;
+	exec_status = correlative_command_cycle(argv);
+	return (exec_status);
 }

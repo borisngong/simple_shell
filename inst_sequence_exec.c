@@ -9,30 +9,32 @@
  */
 int inst_sequence_exec(char **instruction, char **argv)
 {
-	int exec_status;
+	int exec_status, _bd;
 	pid_t subordinate_process;
-	int _bd;
+	char **command;
 
 	subordinate_process = fork();
-	if (subordinate_process == -1)
+	if (subordinate_process == 0)
 	{
-		perror(argv[0]);
-		exit(EXIT_FAILURE);
-	}
-	else if (subordinate_process == 0)
-	{
-		_bd = execve(instruction[0], instruction, environ);
+		command = malloc(sizeof(char *) * 2);
+		if (command == NULL)
+		{
+			perror("Memory Error");
+			exit(0);
+		}
+		command[0] = instruction[0];
+		command[1] = NULL;
+		_bd = execve(command[0], command, environ);
 		if (_bd == -1)
 		{
 			perror(argv[0]);
 			deallocate_matrix(instruction);
-			exit(EXIT_FAILURE);
+			free(command);
+			exit(0);
 		}
 	}
 	else
-	{
 		exec_status = wait_child(subordinate_process, instruction, argv);
-	}
-
 	return (exec_status);
 }
+
