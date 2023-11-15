@@ -12,6 +12,7 @@
 int main(int argc __attribute__((unused)), char **argv)
 {
 	int exec_status;
+
 	exec_status = correlative_command_cycle(argv);
 	return (exec_status);
 }
