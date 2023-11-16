@@ -8,7 +8,7 @@
  * the charcaters will be copied string
  * Return: a pointer to the destination string
 */
-char *_bd_strcpy(char *destin, char *srce)
+char *_bd_strcpy(char *destin, const char *srce)
 {
 	char *untouched_destin;
 

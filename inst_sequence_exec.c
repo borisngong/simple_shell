@@ -36,5 +36,5 @@ int inst_sequence_exec(char **instruction, char **argv, int exec_id)
 		deallocate_matrix(instruction);
 		free(instruct_string), instruct_string = NULL;
 	}
-	return (WEXITSTATUS(exec_status));
+	return (exec_status);
 }

@@ -10,10 +10,8 @@
 */
 int correlative_command_cycle(char **argv)
 {
-	char *user_input;
-	char **instruction;
-	int exec_status = 0;
-	int exec_id = 0;
+	int exec_id = 0, exec_status = 0;
+	char **instruction, *user_input;
 
 	while (true)
 	{
@@ -25,7 +23,6 @@ int correlative_command_cycle(char **argv)
 			return (exec_status);
 		}
 		exec_id++;
-
 		instruction = lexical_analyzer(user_input);
 		if (!instruction)
 		{
@@ -34,6 +31,10 @@ int correlative_command_cycle(char **argv)
 				break;
 			}
 		}
+		if (validate_builtin_command(instruction[0]))
+			execute_builtin_command(instruction, argv, exec_id, &exec_status);
+		else
 		exec_status = inst_sequence_exec(instruction, argv, exec_id);
 	}
 }
+
